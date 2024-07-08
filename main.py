@@ -20,20 +20,38 @@ def main():
     elements = driver.find_elements(By.CLASS_NAME, "step") 
 
     return_string = ""
-
+    
     steps_texts=[]
+    image_srcs=[]
 
     for step in elements:
         steps_texts.append(step.text.replace('\n', ' '))
+        images = step.find_elements(By.TAG_NAME, 'img')
+        temp_srcs=[]
+        for image in images:
+            temp_srcs.append(image.get_attribute('src'))
+        image_srcs.append(temp_srcs)
+    print(image_srcs)
 
     if os.path.exists("temp.txt"):
         os.remove("temp.txt")
-
+    if os.path.exists("images.txt"):
+        os.remove("images.txt")
     steps_texts=list(dict.fromkeys(steps_texts))
 
-    with open("temp.txt", "w") as text_file:
-        text_file.write(return_string)
+    with open("images.txt", "w", encoding="utf-8") as images:
+        for step in image_srcs:
+            write_buff = ""
+            for src in step:
+                write_buff += f"{src} "
+            images.write(f"{write_buff}\n")
+
+
+    with open("temp.txt", "w", encoding="utf-8") as text_file:
+        for i in steps_texts:
+            text_file.write(f"{i}\n")
     
+
     return render_template('index.html')
 
 
