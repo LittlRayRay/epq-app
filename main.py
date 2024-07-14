@@ -26,31 +26,37 @@ def main():
 
     for step in elements:
         steps_texts.append(step.text.replace('\n', ' '))
-        images = step.find_elements(By.TAG_NAME, 'img')
-        temp_srcs=[]
-        for image in images:
-            temp_srcs.append(image.get_attribute('src'))
-        image_srcs.append(temp_srcs)
-    print(image_srcs)
 
     if os.path.exists("temp.txt"):
         os.remove("temp.txt")
     if os.path.exists("images.txt"):
         os.remove("images.txt")
+    
+    # removes duplicate steps 
     steps_texts=list(dict.fromkeys(steps_texts))
-
-    with open("images.txt", "w", encoding="utf-8") as images:
-        for step in image_srcs:
-            write_buff = ""
-            for src in step:
-                write_buff += f"{src} "
-            images.write(f"{write_buff}\n")
-
-
+    
+    images = driver.find_elements(By.TAG_NAME, 'img')
+    image_srcs = [[] for i in range(len(steps_texts))]
+    print(len(steps_texts))
+    for image in images:
+        tempid = image.get_attribute("id").lower()
+        if tempid[:4] == "step":
+            step_no = int(tempid.split("-")[0][4:])
+            image_srcs[step_no-1].append(image)
+            print(step_no)
+        else:
+            print(image.get_attribute("id"))
+    
     with open("temp.txt", "w", encoding="utf-8") as text_file:
         for i in steps_texts:
             text_file.write(f"{i}\n")
     
+    with open("images.txt", "w", encoding="utf-8") as images_file: 
+        for image in image_srcs:
+            text_buff = ""
+            for src in image:
+                text_buff+= f"{src.get_attribute('src')} "
+            images_file.write(f"{text_buff}\n")
 
     return render_template('index.html')
 
