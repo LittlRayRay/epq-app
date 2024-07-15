@@ -1,11 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from flask import render_template
 
 from flask import Flask 
 
 import os
+import time
 
 app = Flask(__name__)
 
@@ -16,6 +18,12 @@ def main():
     driver = webdriver.Chrome()
 
     driver.get("https://www.ifixit.com/Guide/iPhone+15+Pro+Battery+Replacement/166394")
+    
+    height = driver.execute_script("return document.body.scrollHeight")
+    curr_height = 0
+    while curr_height < (height):
+        curr_height += 40
+        driver.execute_script(f"window.scrollTo(0, {curr_height});")
 
     elements = driver.find_elements(By.CLASS_NAME, "step") 
 
@@ -55,6 +63,7 @@ def main():
         for image in image_srcs:
             text_buff = ""
             for src in image:
+                img_src = ""
                 text_buff+= f"{src.get_attribute('src')} "
             images_file.write(f"{text_buff}\n")
 
