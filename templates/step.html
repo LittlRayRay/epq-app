@@ -4,5 +4,8 @@
 
 	<h3>{{text}}</h3>
 	<a href='/steps/{{number+1}}'>next step</a>
-
+	{{srcs}}
+	{% for image in srcs %}
+	<img src="{{ image }}">
+	{% endfor %}
 </body>

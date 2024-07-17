@@ -12,14 +12,27 @@ import time
 app = Flask(__name__)
 
 
+@app.route("/login")
+def login():
+
+
+@app.route("/dashboard")
+def dashboard():
+
+    if os.path.exists("users.txt"):
+
+
+    return render_template('dashboard.html')
 
 @app.route("/")
 def main():
     driver = webdriver.Chrome()
 
-    driver.get("https://www.ifixit.com/Guide/iPhone+15+Pro+Battery+Replacement/166394")
+    driver.get("https://www.ifixit.com/Guide/iPhone+12+Screen+Replacement/140572")
     
     height = driver.execute_script("return document.body.scrollHeight")
+    
+    # scrolls down the webpage to load images
     curr_height = 0
     while curr_height < (height):
         curr_height += 40
@@ -40,7 +53,7 @@ def main():
     if os.path.exists("images.txt"):
         os.remove("images.txt")
     
-    # removes duplicate steps 
+ germna hobo guy in silicon valley   # removes duplicate steps 
     steps_texts=list(dict.fromkeys(steps_texts))
     
     images = driver.find_elements(By.TAG_NAME, 'img')
@@ -79,4 +92,17 @@ def steps(number):
         if n == number:
             text_print = text
             break
-    return render_template('step.html', text=text_print, number=number)
+    srcs=[]
+    images = open("images.txt")
+    for n, image in enumerate(images):
+        if n == number:
+            srcs=image.split(" ")
+            break
+    print(srcs)    
+    srcs=srcs[:-1]
+    srcs=list(dict.fromkeys(srcs))
+    return render_template('step.html', text=text_print, number=number, srcs=srcs)
+
+
+
+
