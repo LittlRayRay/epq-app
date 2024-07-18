@@ -5,18 +5,19 @@ from selenium.webdriver.support import expected_conditions as EC
 from flask import render_template
 
 from flask import Flask 
-
+from flask import Blueprint
 import os
 import time
 
-app = Flask(__name__)
+
+main = Blueprint('main', __name__)
 
 
-@app.route("/login")
+@main.route("/login")
 def login():
 
 
-@app.route("/dashboard")
+@main.route("/dashboard")
 def dashboard():
 
     if os.path.exists("users.txt"):
@@ -24,7 +25,12 @@ def dashboard():
 
     return render_template('dashboard.html')
 
-@app.route("/")
+
+@main.route("/")
+def homepage():
+    return render_template('homepage.html')
+
+@main.route("/repair")
 def main():
     driver = webdriver.Chrome()
 
@@ -53,7 +59,6 @@ def main():
     if os.path.exists("images.txt"):
         os.remove("images.txt")
     
- germna hobo guy in silicon valley   # removes duplicate steps 
     steps_texts=list(dict.fromkeys(steps_texts))
     
     images = driver.find_elements(By.TAG_NAME, 'img')
@@ -83,7 +88,7 @@ def main():
     return render_template('index.html')
 
 
-@app.route("/steps/<number>")
+@main.route("/steps/<number>")
 def steps(number):
     text_print = ""
     number = int(number)
