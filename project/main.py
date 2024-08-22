@@ -12,16 +12,8 @@ import time
 
 main = Blueprint('main', __name__)
 
-
-@main.route("/login")
-def login():
-
-
 @main.route("/dashboard")
 def dashboard():
-
-    if os.path.exists("users.txt"):
-
 
     return render_template('dashboard.html')
 
@@ -31,7 +23,7 @@ def homepage():
     return render_template('homepage.html')
 
 @main.route("/repair")
-def main():
+def repair():
     driver = webdriver.Chrome()
 
     driver.get("https://www.ifixit.com/Guide/iPhone+12+Screen+Replacement/140572")
@@ -107,7 +99,3 @@ def steps(number):
     srcs=srcs[:-1]
     srcs=list(dict.fromkeys(srcs))
     return render_template('step.html', text=text_print, number=number, srcs=srcs)
-
-
-
-

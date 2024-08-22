@@ -3,8 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-def app_init():
-    app = Flask(__name)
+def create_app():
+    app = Flask(__name__)
     app.config['SECRET_KEY']='p@ssword06'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
@@ -19,4 +19,3 @@ def app_init():
     app.register_blueprint(main_blueprint)
 
     return app
-
