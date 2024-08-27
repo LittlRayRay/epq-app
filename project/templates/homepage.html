@@ -17,13 +17,20 @@
     <nav class="navbar bg-body-tertiary">
       <form class="container-fluid">
         <a class="navbar-brand justify-content-start"> RepairIt </a>
-	<button class="btn btn-outline-success me-2 justify-content-end" type="button">Main button</button>
+	<button class="btn btn-outline-success me-2 justify-content-end" onclick="location.href='/make-new-repair'" type="button">New Repair</button>
         <button class="btn btn-sm btn-outline-secondary justify-content-end" type="button">Smaller button</button>
       </form>
     </nav>
-    
-      
-    <!-- End Example Code -->
+    <div class="container text-center">
+	<h1> All Current Devices</h1>
+	    <div class="row row-cols-4">
+		    {% for id, name in projects %}
+		    <a href="/repair/{{ id }}">{{ name }}</a><br><br>
+		    {% endfor %}
+	    </div>
+    </div>
+	
+
   </body>
 </html>
 
