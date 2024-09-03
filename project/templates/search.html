@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/htmx.org@2.0.2"></script>
+</head>
+<body>
+<input type="text" class="input" placeholder="Search for guides..." name="s" hx-trigger="keyup changed delay:400ms" hx-get="/search" hx-target="#results">
+   <table>
+    <thead>
+        <tr>
+            <th>
+                Guide
+            </th>
+        </tr>
+    </thead>
+    <tbody id="results">
+
+    </tbody>
+   </table> 
+</body>
+</html>

@@ -3,7 +3,7 @@
 	<h1>Step {{number + 1}}</h1>
 
 	<h3>{{text}}</h3>
-	<a href='/steps/{{number+1}}'>next step</a>
+	<a href='/{{guide}}/steps/{{number+1}}'>next step</a>
 	{{srcs}}
 	{% for image in srcs %}
 	<img src="{{ image }}">

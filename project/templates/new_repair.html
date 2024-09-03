@@ -7,15 +7,15 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<form action="/add-new-repair" method="post">
-		<div class="mb-3">
+	<h1>
+		New Repair: "{{res}}"
+	</h1>
+	<form action="/add-new-repair/{{id}}" method="post">
+		<div class="mb-3" style="width: 50%; max-width: fit-content; margin-left: auto; margin-right: auto;">
 			<label for="name" class="form-label">Repair name</label>
 			<input type="text" class="form-control" id="name" name="name">
 		</div>
-		<div class="mb-3">
-			<label for="url" class="form-label">URL</label>
-			<input type="text" class="form-control" id="url" name="url">
-		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
+		
+		<button type="submit" class="btn btn-primary" style="margin-left: auto; margin-right: auto;">Submit</button>
 	</form>
 </body>
