@@ -7,8 +7,8 @@ from flask import redirect
 from flask import url_for
 from flask import Blueprint
 from flask import request
+
 import os
-import time
 import sqlite3
 
 
@@ -121,8 +121,6 @@ def intermed(num):
         driver.execute_script(f"window.scrollTo(0, {curr_height});")
 
     elements = driver.find_elements(By.CLASS_NAME, "step") 
-
-    return_string = ""
 
     steps_texts=[]
     image_srcs=[]

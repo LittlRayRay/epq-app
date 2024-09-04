@@ -18,4 +18,8 @@ def create_app():
 
     app.register_blueprint(main_blueprint)
 
+    from .ai_repair import ai_repair as ai_repair_blueprint
+
+    app.register_blueprint(ai_repair_blueprint)
+
     return app

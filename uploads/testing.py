@@ -1,0 +1,1 @@
+ChatCompletionMessage(content='```python\ndef add_two(a, b):\n    return a + b\n```', refusal=None, role='assistant', function_call=None, tool_calls=None)
